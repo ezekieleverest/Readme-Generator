@@ -17,12 +17,6 @@ const writeFileAsync = util.promisify(fs.writeFile);
         name: "description"
     },
     {
-        type: "checkbox",
-        message: "Which sections of the following will you be using?",
-        choices: ["Description", "Installation", "Usage", "Liscense", "Contributing", "Tests", "Questions"],
-        name: "table"
-    },
-    {
         type: "input",
         message: "Please enter instructions for installation",
         name: "install"
@@ -33,8 +27,9 @@ const writeFileAsync = util.promisify(fs.writeFile);
         name: "usage"
     },
     {
-        type: "input",
-        message: "Please enter License",
+        type: "list",
+        message: "Please choose your license",
+        choices: ["Apache", "Boost", "Eclipse", "IBM", "MIT", "Mozilla", "Perl", "SIL", "Unlicense"],
         name: "license"
     },
     {
@@ -44,7 +39,7 @@ const writeFileAsync = util.promisify(fs.writeFile);
     },
     {
         type: "input",
-        message: "How would you like this application to be tested?",
+        message: "Please provide instructions for testing this application",
         name: "tests"
     },
     {
@@ -58,6 +53,46 @@ const writeFileAsync = util.promisify(fs.writeFile);
         name: "email"
     }
     ]
+
+
+
+// function to initialize program
+function init() {
+    inquirer.prompt(question)
+    .then(data => {
+    writeFileAsync("readMe.md", generate.generateMarkdown(data))
+    // let license = data.license
+})
+.catch(console.error)}
+
+// function call to initialize program
+init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // .then (data => {
     //     const md = generateMarkdown(data);
     //     writeFileAsync("README.md", md)
@@ -75,13 +110,4 @@ const writeFileAsync = util.promisify(fs.writeFile);
 function writeToFile(file, data) {
 }
 
-// function to initialize program
-function init() {
-    inquirer.prompt(question)
-    .then(data => {
-    writeFileAsync("readMe.md", generate.generateMarkdown(data))
-})
-.catch(console.error)}
 
-// function call to initialize program
-init();
