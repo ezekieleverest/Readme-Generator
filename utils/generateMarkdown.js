@@ -66,7 +66,8 @@ function generateMarkdown(data) {
   ${data.tests}
 
   ## Questions
-  ${data.github}
+  ${data.github} 
+ 
   ${data.email}
 `;
 }
